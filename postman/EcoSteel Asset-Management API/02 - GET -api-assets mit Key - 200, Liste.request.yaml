@@ -1,0 +1,12 @@
+$kind: http-request
+name: 02 - GET /api/assets mit Key -> 200, Liste
+url: "{{baseUrl}}/api/assets"
+method: GET
+headers:
+  x-api-key: "{{apiKey}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status 200', () => pm.response.to.have.status(200));
+      pm.test('Antwort ist ein Array', () => Array.isArray(pm.response.json()));
+order: 2000

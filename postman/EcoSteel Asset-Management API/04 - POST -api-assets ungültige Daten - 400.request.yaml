@@ -1,0 +1,18 @@
+$kind: http-request
+name: 04 - POST /api/assets ungültige Daten -> 400
+url: "{{baseUrl}}/api/assets"
+method: POST
+headers:
+  x-api-key: "{{apiKey}}"
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "name": "",
+      "status": "kaputt"
+    }
+scripts:
+  - type: afterResponse
+    code: pm.test('Status 400', () => pm.response.to.have.status(400));
+order: 4000

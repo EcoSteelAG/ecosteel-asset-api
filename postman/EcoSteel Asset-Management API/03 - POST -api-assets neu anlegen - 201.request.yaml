@@ -1,0 +1,23 @@
+$kind: http-request
+name: 03 - POST /api/assets neu anlegen -> 201
+url: "{{baseUrl}}/api/assets"
+method: POST
+headers:
+  x-api-key: "{{apiKey}}"
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "name": "Kompressor Halle 3",
+      "standort": "Zürich",
+      "status": "aktiv"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status 201', () => pm.response.to.have.status(201));
+      const json = pm.response.json();
+      pm.test('Antwort enthält _id', () => pm.expect(json).to.have.property('_id'));
+      pm.collectionVariables.set('assetId', json._id);
+order: 3000

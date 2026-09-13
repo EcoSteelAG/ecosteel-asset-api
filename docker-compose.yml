@@ -1,0 +1,17 @@
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URL=mongodb://mongo:27017
+      - DB_NAME=ecosteel
+      - API_KEY=${API_KEY:-change-me-please}
+      - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:5173}
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongodb/mongodb-atlas-local
+    ports:
+      - "27017:27017"

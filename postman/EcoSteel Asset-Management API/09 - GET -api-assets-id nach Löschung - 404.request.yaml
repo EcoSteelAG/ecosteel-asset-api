@@ -1,0 +1,10 @@
+$kind: http-request
+name: 09 - GET /api/assets/:id nach Löschung -> 404
+url: "{{baseUrl}}/api/assets/{{assetId}}"
+method: GET
+headers:
+  x-api-key: "{{apiKey}}"
+scripts:
+  - type: afterResponse
+    code: pm.test('Status 404 nach Löschung', () => pm.response.to.have.status(404));
+order: 9000

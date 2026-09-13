@@ -1,0 +1,12 @@
+$kind: http-request
+name: 05 - GET /api/assets/:id suchen -> 200
+url: "{{baseUrl}}/api/assets/{{assetId}}"
+method: GET
+headers:
+  x-api-key: "{{apiKey}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status 200', () => pm.response.to.have.status(200));
+      pm.test('Name stimmt', () => pm.expect(pm.response.json().name).to.eql('Kompressor Halle 3'));
+order: 5000

@@ -1,0 +1,6 @@
+$kind: collection
+description: Testfälle für die APDE Transferaufgabe 4.2 (Server-App). Deckt die vier Basisfälle neu/suchen/ändern/löschen sowie Negativfälle (fehlender API-Key, ungültige Daten, nicht existierende ID) ab.
+variables:
+  baseUrl: http://localhost:3000
+  apiKey: ecosteel-geheim-2026
+  assetId: ""

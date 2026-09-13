@@ -1,0 +1,8 @@
+$kind: http-request
+name: 01 - GET /api/assets ohne API-Key -> 401
+url: "{{baseUrl}}/api/assets"
+method: GET
+scripts:
+  - type: afterResponse
+    code: pm.test('Status 401', () => pm.response.to.have.status(401));
+order: 1000

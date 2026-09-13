@@ -1,0 +1,10 @@
+$kind: http-request
+name: 08 - DELETE /api/assets/:id löschen -> 204
+url: "{{baseUrl}}/api/assets/{{assetId}}"
+method: DELETE
+headers:
+  x-api-key: "{{apiKey}}"
+scripts:
+  - type: afterResponse
+    code: pm.test('Status 204', () => pm.response.to.have.status(204));
+order: 8000

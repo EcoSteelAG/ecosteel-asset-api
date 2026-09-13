@@ -1,0 +1,7 @@
+# Use this workspace to collaborate
+workspace:
+  id: e1afc07f-5266-4ee7-8066-5ab94abd380c
+
+localResources:
+  collections:
+    - ../EcoSteel Asset-Management API
