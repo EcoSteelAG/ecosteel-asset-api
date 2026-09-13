@@ -20,6 +20,9 @@ export function createApp(db) {
   // Health-Check ohne Auth (für Deployment-Monitoring, siehe Kapitel 4.4)
   app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
 
+  // Einfache Willkommens-Route für die Startseite (kein API-Endpunkt)
+  app.get('/', (req, res) => res.status(200).json({ status: 'EcoSteel Asset-API läuft', docs: '/api/assets' }));
+
   // Alle /api/assets-Endpunkte erfordern einen gültigen API-Key
   app.use('/api/assets', requireApiKey, createAssetRouter(db));
 
