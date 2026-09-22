@@ -2,8 +2,9 @@
 // Minimaler In-Memory-Ersatz für eine MongoDB-Collection, ausschliesslich für
 // Unit-/Integrationstests. Implementiert genau die Methoden, die
 // assetRepository.js tatsächlich verwendet (insertOne, find, findOne,
-// findOneAndUpdate, deleteOne), inkl. echter ObjectId aus dem mongodb-Package,
-// damit die Test-Logik dieselben ID-Regeln durchläuft wie im Produktivbetrieb.
+// findOneAndUpdate, deleteOne, countDocuments), inkl. echter ObjectId aus
+// dem mongodb-Package, damit die Test-Logik dieselben ID-Regeln durchläuft
+// wie im Produktivbetrieb.
 
 import { ObjectId } from 'mongodb';
 
@@ -36,6 +37,18 @@ export function createFakeDb() {
       const existed = store.has(id);
       store.delete(id);
       return { deletedCount: existed ? 1 : 0 };
+    },
+    // Wird von getNextInventarnummer() in assetRepository.js verwendet, um
+    // die Anzahl bereits vergebener Inventarnummern im laufenden Jahr zu
+    // zählen. Unterstützt hier nur den konkret verwendeten Filter
+    // { inventarnummer: { $regex: prefix } }, was für die Tests ausreicht.
+    async countDocuments(filter) {
+      const regexSource = filter?.inventarnummer?.$regex;
+      if (!regexSource) return store.size;
+      const regex = new RegExp(regexSource);
+      return Array.from(store.values()).filter(
+          (doc) => typeof doc.inventarnummer === 'string' && regex.test(doc.inventarnummer),
+      ).length;
     },
   };
 
