@@ -8,11 +8,20 @@ headers:
 body:
   type: text
   content: |-
-    {
-      "name": "Kompressor Halle 3",
-      "standort": "Zürich",
-      "status": "aktiv"
-    }
+  {
+    "name": "Kompressor Halle 3",
+    "standort": "Zürich",
+    "status": "aktiv",
+    "hersteller": "Atlas Copco",
+    "kategorie": "Druckluft & Kompressoren",
+    "seriennummer": "AC-2024-8841",
+    "lieferant": "Atlas Copco Schweiz AG",
+    "kaufdatum": "2024-03-15",
+    "betriebsstunden": 0,
+    "kaufpreis": 18500,
+    "naechsteWartung": "2026-12-01",
+    "notiz": "Neuanschaffung für Halle 3"
+  }
 scripts:
   - type: afterResponse
     code: |-
